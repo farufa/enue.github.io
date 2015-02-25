@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <head>
+        <script type="text/javascript" src="jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="anison.txt"></script>
+    </head>
+
+    <body>
+        <table id="mainTable" border=1></table>
+        <p id="sample"></p>
+        <button onclick="appendRow();">セレクト</button>
+
+        <script type="text/javascript">
+            const columnCount = 3;
+            var mainTable;
+            count = 0;
+
+            function appendRow()
+            {
+                if (mainTable == null)
+                {
+                    mainTable = document.getElementById("mainTable");
+                }
+                var tr = document.createElement("tr");
+                mainTable.appendChild(tr);
+
+                count += 1;
+                var td = document.createElement("td");
+                td.innerHTML = count;
+                tr.appendChild(td);
+
+                for(var i=0 ; i<columnCount; ++i)
+                {
+                    var index = Math.floor(Math.random() * data.length);
+                    var member = data[index];
+
+                    var td = document.createElement("td");
+                    td.innerHTML = member;
+                    tr.appendChild(td);
+                }
+            }
+        </script>
+    </body>
+<html>
+
+
