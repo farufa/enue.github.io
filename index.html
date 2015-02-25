@@ -42,10 +42,10 @@
                 for(var i=0 ; i<selectCount; ++i)
                 {
                     var index = Math.floor(Math.random() * data.length);
-                    var member = data[index];
+                    var title = data[index]["title"];
 
                     var td = document.createElement("td");
-                    td.innerHTML = member;
+                    td.innerHTML = title;
                     tr.appendChild(td);
                 }
             }
