@@ -7,8 +7,8 @@
     </head>
 
     <body>
-        <table id="mainTable" border=1></table>
-        <p id="sample"></p>
+        <div id="main">
+        </div>
         <div>
             曲数
             <select id="selectCount">
@@ -18,25 +18,30 @@
                 <option value="4" selected>4</option>
             </select>
         </div>
-        <button onclick="appendRow();">セレクト</button>
+        <br>
+        <div>
+            <button onclick="select();">抽選</button>
+        </div>
 
         <script type="text/javascript">
-            var mainTable;
+            var main;
             count = 0;
 
-            function appendRow()
+            function select()
             {
-                if (mainTable == null)
+                if (main == null)
                 {
-                    mainTable = document.getElementById("mainTable");
+                    main = document.getElementById("main");
                 }
-                var tr = document.createElement("tr");
-                mainTable.appendChild(tr);
 
                 count += 1;
-                var td = document.createElement("td");
-                td.innerHTML = count;
-                tr.appendChild(td);
+
+                var h1 = document.createElement("h1");
+                h1.innerHTML = count;
+                main.appendChild(h1);
+
+                var table = document.createElement("table");
+                main.appendChild(table);
 
                 var selectCount = Number($("#selectCount").val());
                 for(var i=0 ; i<selectCount; ++i)
@@ -45,10 +50,14 @@
                     var title = data[index]["title"];
                     data.splice(index, 1)
 
+                    var tr = document.createElement("tr");
+                    table.appendChild(tr);
                     var td = document.createElement("td");
                     td.innerHTML = title;
                     tr.appendChild(td);
                 }
+                var hr = document.createElement("hr");
+                main.appendChild(hr);
             }
         </script>
     </body>
