@@ -9,10 +9,18 @@
     <body>
         <table id="mainTable" border=1></table>
         <p id="sample"></p>
+        <div>
+            曲数
+            <select id="selectCount">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4" selected>4</option>
+            </select>
+        </div>
         <button onclick="appendRow();">セレクト</button>
 
         <script type="text/javascript">
-            const columnCount = 3;
             var mainTable;
             count = 0;
 
@@ -30,7 +38,8 @@
                 td.innerHTML = count;
                 tr.appendChild(td);
 
-                for(var i=0 ; i<columnCount; ++i)
+                var selectCount = Number($("#selectCount").val());
+                for(var i=0 ; i<selectCount; ++i)
                 {
                     var index = Math.floor(Math.random() * data.length);
                     var member = data[index];
