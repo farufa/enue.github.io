@@ -43,6 +43,7 @@
                 {
                     var index = Math.floor(Math.random() * data.length);
                     var title = data[index]["title"];
+                    data.splice(index, 1)
 
                     var td = document.createElement("td");
                     td.innerHTML = title;
