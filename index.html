@@ -27,6 +27,8 @@
             var main;
             count = 0;
 
+            outputColumns = ["title", "product", "category", "artist", "year"];
+
             function select()
             {
                 if (main == null)
@@ -47,18 +49,32 @@
                 for(var i=0 ; i<selectCount; ++i)
                 {
                     var index = Math.floor(Math.random() * data.length);
-                    var title = data[index]["title"];
+                    var record = data[index];
                     data.splice(index, 1)
 
                     var tr = document.createElement("tr");
                     table.appendChild(tr);
-                    var td = document.createElement("td");
-                    td.innerHTML = title;
-                    tr.appendChild(td);
+
+                    for(var j=0 ; j<outputColumns.length ; ++j)
+                    {
+                        var td = document.createElement("td");
+                        td.innerHTML = record[outputColumns[j]];
+                        tr.appendChild(td);
+                    }
+
                 }
                 var hr = document.createElement("hr");
                 main.appendChild(hr);
             }
+
+            if (main == null)
+            {
+                main = document.getElementById("main");
+            }
+            var p = document.createElement("p");
+            p.innerHTML = "現在" + data.length + "曲登録";
+            main.appendChild(p);
+
         </script>
     </body>
 <html>
