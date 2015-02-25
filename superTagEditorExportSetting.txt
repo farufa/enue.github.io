@@ -1,0 +1,4 @@
+"ファイル名","アーティスト","年代"
+[LOOP_START]
+%FILE_NAME%,%ARTIST_NAME%,%RELEASE_YEAR%
+[LOOP_END]
