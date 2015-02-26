@@ -3,7 +3,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <head>
         <script type="text/javascript" src="jquery-2.1.3.min.js"></script>
-        <script type="text/javascript" src="anison.txt"></script>
     </head>
 
     <body>
@@ -24,18 +23,14 @@
         </div>
 
         <script type="text/javascript">
-            var main;
+            data = [];
+            var main = document.getElementById("main");
             count = 0;
 
             outputColumns = ["title", "product", "category", "artist", "year"];
 
             function select()
             {
-                if (main == null)
-                {
-                    main = document.getElementById("main");
-                }
-
                 count += 1;
 
                 var h1 = document.createElement("h1");
@@ -67,14 +62,20 @@
                 main.appendChild(hr);
             }
 
-            if (main == null)
+            function concatJson(json)
             {
-                main = document.getElementById("main");
+                Array.prototype.push.apply(data, json);
             }
+        </script>
+
+        <!-- ここから曲データベース -->
+        <script type="text/javascript" src="anison.txt"></script>
+        <!-- ここまで曲データベース -->
+
+        <script type="text/javascript">
             var p = document.createElement("p");
             p.innerHTML = "現在" + data.length + "曲登録";
-            main.appendChild(p);
-
+            document.getElementById("main").appendChild(p);
         </script>
     </body>
 <html>
