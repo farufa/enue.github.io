@@ -2,6 +2,7 @@
 <html lang="ja">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <head>
+        <link rel="stylesheet" href="style.css">
         <script type="text/javascript" src="jquery-2.1.3.min.js"></script>
     </head>
     <body>
@@ -17,8 +18,8 @@
         <div id="main">
         </div>
         <br>
-        <div style="width:400px; height:100px; margin:0 auto 0 auto;">
-            <button style="width:400px; height:50px; margin:0 auto 0 auto;" onclick="select();">抽選</button>
+        <div style="width:400px; height:200px; margin:0 auto 0 auto;">
+            <button style="width:400px; height:100px; margin:auto;" onclick="select();">抽選</button>
         </div>
 
         <script type="text/javascript">
@@ -36,9 +37,6 @@
                 h1.innerHTML = count;
                 main.appendChild(h1);
 
-                var div = document.createElement("div");
-                main.appendChild(div);
-
                 var selectCount = Number($("#selectCount").val());
                 for(var i=0 ; i<selectCount; ++i)
                 {
@@ -46,21 +44,19 @@
                     var record = data[index];
                     data.splice(index, 1)
 
-                    var d = document.createElement("div");
-                    div.appendChild(d);
-
-                    d.style.backgroundColor = "#eae5e3";
-
                     var h = document.createElement("h4");
                     h.innerHTML = record["title"];
-                    h.style.backgroundColor = "#f4dda5";
-                    h.style.padding = "5px";
-                    d.appendChild(h);
+                    main.appendChild(h);
 
                     var str = "";
+
+                    if (record["year"])
+                    {
+                        str += record["year"];
+                    }
                     if (record["product"])
                     {
-                        str += record["product"];
+                        str += "　　" + record["product"];
                     }
                     if (record["category"])
                     {
@@ -68,16 +64,13 @@
                     }
                     if (record["artist"])
                     {
-                        str += " （" + record["artist"] + "）";
-                    }
-                    if (record["year"])
-                    {
-                        str += " - " + record["year"];
+                        str += "　　　" + record["artist"];
                     }
                     var p = document.createElement("p");
-                    d.appendChild(p);
-                    p.style.padding = "5px";
+                    p.className = "song";
+                    main.appendChild(p);
                     p.innerHTML = str;
+
                 }
                 var hr = document.createElement("hr");
                 main.appendChild(hr);
