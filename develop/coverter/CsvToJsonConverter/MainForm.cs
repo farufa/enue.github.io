@@ -58,7 +58,7 @@ namespace CsvToJsonConverter
                     string title;
 
                     // 括弧はじまりでないものは特別扱い
-                    if (filename.StartsWith("（"))
+                    if (!filename.StartsWith("（"))
                     {
                         title = filename;
                         productName = "";
