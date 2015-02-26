@@ -53,7 +53,10 @@
                     for(var j=0 ; j<outputColumns.length ; ++j)
                     {
                         var td = document.createElement("td");
-                        td.innerHTML = record[outputColumns[j]];
+                        if (record[outputColumns[j]])
+                        {
+                            td.innerHTML = record[outputColumns[j]];
+                        }
                         tr.appendChild(td);
                     }
 
