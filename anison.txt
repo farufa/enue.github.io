@@ -1,3 +1,4 @@
+﻿concatJson([
 {title:'Caipirinha', product:'', category:'', artist:'', year:'2005'}, 
 {title:'Caramelldansen', product:'', category:'', artist:'', year:'2001'}, 
 {title:'Dragostea Din Tei ～恋のマイアヒ～', product:'', category:'', artist:'', year:'2005'}, 
@@ -17624,3 +17625,4 @@
 {title:'陽気なアコちゃん', product:'鳥人戦隊ジェットマン', category:'IN', artist:'', year:'1991'}, 
 {title:'青空で会いましょう', product:'鳥人戦隊ジェットマン', category:'IN', artist:'', year:'1991'}, 
 {title:'鳥人戦隊ジェットマン', product:'鳥人戦隊ジェットマン', category:'OP', artist:'', year:'1991'}, 
+]);
