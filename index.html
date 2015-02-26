@@ -36,8 +36,8 @@
                 h1.innerHTML = count;
                 main.appendChild(h1);
 
-                var table = document.createElement("table");
-                main.appendChild(table);
+                var div = document.createElement("div");
+                main.appendChild(div);
 
                 var selectCount = Number($("#selectCount").val());
                 for(var i=0 ; i<selectCount; ++i)
@@ -46,19 +46,38 @@
                     var record = data[index];
                     data.splice(index, 1)
 
-                    var tr = document.createElement("tr");
-                    table.appendChild(tr);
+                    var d = document.createElement("div");
+                    div.appendChild(d);
 
-                    for(var j=0 ; j<outputColumns.length ; ++j)
+                    d.style.backgroundColor = "#eae5e3";
+
+                    var h = document.createElement("h4");
+                    h.innerHTML = record["title"];
+                    h.style.backgroundColor = "#f4dda5";
+                    h.style.padding = "5px";
+                    d.appendChild(h);
+
+                    var str = "";
+                    if (record["product"])
                     {
-                        var td = document.createElement("td");
-                        if (record[outputColumns[j]])
-                        {
-                            td.innerHTML = record[outputColumns[j]];
-                        }
-                        tr.appendChild(td);
+                        str += record["product"];
                     }
-
+                    if (record["category"])
+                    {
+                        str += " " + record["category"];
+                    }
+                    if (record["artist"])
+                    {
+                        str += " （" + record["artist"] + "）";
+                    }
+                    if (record["year"])
+                    {
+                        str += " - " + record["year"];
+                    }
+                    var p = document.createElement("p");
+                    d.appendChild(p);
+                    p.style.padding = "5px";
+                    p.innerHTML = str;
                 }
                 var hr = document.createElement("hr");
                 main.appendChild(hr);
