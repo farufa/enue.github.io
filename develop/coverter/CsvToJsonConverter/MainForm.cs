@@ -53,14 +53,45 @@ namespace CsvToJsonConverter
                     // ファイル名を分解
                     var filename = System.IO.Path.GetFileNameWithoutExtension(cell);
 
-                    // 括弧とじ検索
-                    var pivot = filename.IndexOf("）");
-                    var head = filename.Substring(0, pivot);
-                    var title = filename.Substring(pivot + 1);
+                    string categoryName;
+                    string productName;
+                    string title;
 
-                    var spacePosition = head.LastIndexOf(" ");
-                    var productName = head.Substring(1, spacePosition - 1);
-                    var categoryName = head.Substring(spacePosition + 1);
+                    // 括弧はじまりでないものは特別扱い
+                    if (filename.StartsWith("（"))
+                    {
+                        title = filename;
+                        productName = "";
+                        categoryName = "";
+                    }
+                    else
+                    {
+                        // 括弧とじ検索
+                        var pivot = filename.IndexOf("）");
+                        if (pivot < 0)
+                        {
+                            title = filename;
+                            productName = "";
+                            categoryName = "";
+                        }
+                        else
+                        {
+                            var head = filename.Substring(0, pivot);
+                            title = filename.Substring(pivot + 1);
+
+                            var spacePosition = head.LastIndexOf(" ");
+                            if (spacePosition < 0)
+                            {
+                                productName = head.Substring(1);
+                                categoryName = "";
+                            }
+                            else
+                            {
+                                productName = head.Substring(1, spacePosition - 1);
+                                categoryName = head.Substring(spacePosition + 1);
+                            }
+                        }
+                    }
 
                     var artist = csv[1, i];
                     var year = csv[2, i];
