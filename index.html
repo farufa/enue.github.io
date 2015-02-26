@@ -4,12 +4,9 @@
     <head>
         <script type="text/javascript" src="jquery-2.1.3.min.js"></script>
     </head>
-
     <body>
-        <div id="main">
-        </div>
         <div>
-            曲数
+            抽選曲数
             <select id="selectCount">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -17,9 +14,11 @@
                 <option value="4" selected>4</option>
             </select>
         </div>
+        <div id="main">
+        </div>
         <br>
-        <div>
-            <button onclick="select();">抽選</button>
+        <div style="width:400px; height:100px; margin:0 auto 0 auto;">
+            <button style="width:400px; height:50px; margin:0 auto 0 auto;" onclick="select();">抽選</button>
         </div>
 
         <script type="text/javascript">
