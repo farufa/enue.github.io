@@ -32,72 +32,106 @@
         </div>
 
         <script type="text/javascript">
+            selectedIndexBatches = [];
             data = [];
             var main = document.getElementById("main");
-            count = 0;
-
-            outputColumns = ["title", "product", "category", "artist", "year"];
 
             function select()
             {
-                count += 1;
-
-                var h1 = document.createElement("h1");
-                h1.innerHTML = count;
-                main.appendChild(h1);
-
                 var selectCount;
-                var batchCount;
+                var batchSize;
                 if ($("#isSquence").prop('checked'))
                 {
                     selectCount = 1;;
-                    batchCount = Number($("#selectCount").val());
+                    batchSize = Number($("#selectCount").val());
                 }
                 else
                 {
                     selectCount = Number($("#selectCount").val());
-                    batchCount = 1;
+                    batchSize = 1;
                 }
 
-                for(var i=0 ; i<selectCount; ++i)
+                selectedIndexBatches.push([]);
+                for(var i = 0 ; i<selectCount ; ++i)
                 {
-                    var batchIndex = Math.floor(Math.random() * (data.length - (batchCount-1)));
-                    var batch = data.splice(batchIndex, batchCount)
+                    var batch = selectIndices(batchSize);
+                    Array.prototype.push.apply(selectedIndexBatches[selectedIndexBatches.length - 1], batch);
+                }
 
-                    for(var j=0 ; j<batch.length ; ++j)
+                var batch = selectedIndexBatches[selectedIndexBatches.length - 1];
+                generateOutput(selectedIndexBatches.length, batch)
+            }
+
+            function generateOutput(caption, batch)
+            {
+                var h1 = document.createElement("h1");
+                h1.innerHTML = caption;
+                main.appendChild(h1);
+
+                for(var i=0 ; i<batch.length ; ++i)
+                {
+                    var record = data[batch[i]];
+
+                    var h = document.createElement("h4");
+                    h.innerHTML = record["title"];
+                    main.appendChild(h);
+
+                    var str = "";
+
+                    if (record["year"])
                     {
-                        var record = batch[j];
-
-                        var h = document.createElement("h4");
-                        h.innerHTML = record["title"];
-                        main.appendChild(h);
-
-                        var str = "";
-
-                        if (record["year"])
-                        {
-                            str += record["year"];
-                        }
-                        if (record["product"])
-                        {
-                            str += "　" + record["product"];
-                        }
-                        if (record["category"])
-                        {
-                            str += " " + record["category"];
-                        }
-                        if (record["artist"])
-                        {
-                            str += "　" + record["artist"];
-                        }
-                        var p = document.createElement("p");
-                        p.className = "song";
-                        main.appendChild(p);
-                        p.innerHTML = str;
+                        str += record["year"];
                     }
+                    if (record["product"])
+                    {
+                        str += "　" + record["product"];
+                    }
+                    if (record["category"])
+                    {
+                        str += " " + record["category"];
+                    }
+                    if (record["artist"])
+                    {
+                        str += "　" + record["artist"];
+                    }
+                    var p = document.createElement("p");
+                    p.className = "song";
+                    main.appendChild(p);
+                    p.innerHTML = str;
                 }
                 var hr = document.createElement("hr");
                 main.appendChild(hr);
+            }
+
+            function selectIndices(batchSize)
+            {
+                var selectedIndicesCount = 0;
+                for(var i=0 ; i<selectedIndexBatches.length; ++i)
+                {
+                    selectedIndicesCount += selectedIndexBatches[i].length;
+                }
+
+                var r = Math.floor(Math.random() * (data.length - (batchSize - 1) - selectedIndicesCount));
+                var overCount = 0;
+                for(var i=0 ; i<selectedIndexBatches.length; ++i)
+                {
+                    for(var j=0; j<selectedIndexBatches[i].length; ++j)
+                    {
+                        if (r >= selectedIndexBatches[i][j])
+                        {
+                            overCount += 1;
+                        }
+                    }
+                }
+                r += overCount;
+
+                var batch = [];
+                for(var i=0 ; i<batchSize ; ++i)
+                {
+                    batch.push(r + i);
+                }
+
+                return batch;
             }
 
             function concatJson(json)
