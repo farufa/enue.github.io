@@ -1,35 +1,50 @@
 body
 {
-    font-size: 60px;
+/*    font-size: 60px; */
 }
 
 select
 {
-    width: 300px;
-    height: 50px;
+/*    width: 300px;
+    height: 50px;*/
 }
 
 input[type=checkbox]
 {
-    width: 50px;
-    height: 50px;
+/*    width: 50px;
+    height: 50px;*/
 }
 
 p
 {
-    font-size: 40px;
+/*    font-size: 40px; */
 }
 
 h4
 {
     background: #f4dda5;
-    padding: 10px 20px;
+    padding: 5px 10px;
     margin :0px;
 }
 
 p.song
 {
     background : #eae5e3;
-    padding: 10px 40px;
+    padding: 5px 20px;
     margin :0px;
+}
+
+div.buttonDiv
+{
+    width:200px;
+    height:100px;
+    margin:0 auto 0 auto;
+
+}
+
+button
+{
+    width:200px;
+    height:50px;
+    margin:auto;
 }
