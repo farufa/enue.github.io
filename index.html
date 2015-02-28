@@ -14,6 +14,9 @@
             <button onclick="reset();">リセット</button>
         </div>
 
+        <div id="songCount">
+        </div>
+
         <div id="main">
         </div>
         <br>
@@ -171,7 +174,7 @@
         <script type="text/javascript">
             var p = document.createElement("p");
             p.innerHTML = "現在" + data.length + "曲登録";
-            document.getElementById("main").appendChild(p);
+            document.getElementById("songCount").appendChild(p);
 
             // ロード
             if(window.localStorage)
