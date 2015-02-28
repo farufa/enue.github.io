@@ -156,9 +156,20 @@
                     }
                 }
                 var batch = [];
+
+                var offset = 0;
                 for(var i=0 ; i<batchSize ; ++i)
                 {
-                    batch.push(r + i);
+                    while(true)
+                    {
+                        if($.inArray(r + offset, selectedIndices) < 0)
+                        {
+                            batch.push(r + offset);
+                            offset += 1;
+                            break;
+                        }
+                        offset += 1;
+                    }
                 }
 
                 return batch;
