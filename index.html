@@ -132,26 +132,29 @@
 
             function selectIndices(batchSize)
             {
-                var selectedIndicesCount = 0;
+                // FIXME: 連番のダブりチェックができない
+                selectedIndices = [];
                 for(var i=0 ; i<selectedIndexBatches.length; ++i)
                 {
-                    selectedIndicesCount += selectedIndexBatches[i].length;
+                    Array.prototype.push.apply(selectedIndices, selectedIndexBatches[i]);
                 }
-
-                var r = Math.floor(Math.random() * (data.length - (batchSize - 1) - selectedIndicesCount));
-                var overCount = 0;
-                for(var i=0 ; i<selectedIndexBatches.length; ++i)
-                {
-                    for(var j=0; j<selectedIndexBatches[i].length; ++j)
+                selectedIndices.sort(
+                    function(a, b)
                     {
-                        if (r >= selectedIndexBatches[i][j])
-                        {
-                            overCount += 1;
-                        }
+                        if( a < b ) return -1;
+                        if( a > b ) return 1;
+                        return 0;
+                    }
+                );
+
+                var r = Math.floor(Math.random() * (data.length - (batchSize - 1) - selectedIndices.length));
+                for(var i=0 ; i<selectedIndices.length; ++i)
+                {
+                    if (r >= selectedIndices[i])
+                    {
+                        r += 1;
                     }
                 }
-                r += overCount;
-
                 var batch = [];
                 for(var i=0 ; i<batchSize ; ++i)
                 {
