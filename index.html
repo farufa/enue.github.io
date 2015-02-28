@@ -22,7 +22,11 @@
                 <option value="15">15</option>
                 <option value="20">20</option>
             </select>
+            <span style="margin:100px;">
+                <input type="checkbox" id="isSquence" name="isSquence" value="1" checked=true><label for="isSquence">連番で出力</label>
+            </span>
         </div>
+
         <div id="main">
         </div>
         <br>
@@ -45,40 +49,55 @@
                 h1.innerHTML = count;
                 main.appendChild(h1);
 
-                var selectCount = Number($("#selectCount").val());
+                var selectCount;
+                var batchCount;
+                if ($("#isSquence").prop('checked'))
+                {
+                    selectCount = 1;;
+                    batchCount = Number($("#selectCount").val());
+                }
+                else
+                {
+                    selectCount = Number($("#selectCount").val());
+                    batchCount = 1;
+                }
+
                 for(var i=0 ; i<selectCount; ++i)
                 {
-                    var index = Math.floor(Math.random() * data.length);
-                    var record = data[index];
-                    data.splice(index, 1)
+                    var batchIndex = Math.floor(Math.random() * data.length - (batchCount-1));
+                    var batch = data.splice(batchIndex, batchCount)
 
-                    var h = document.createElement("h4");
-                    h.innerHTML = record["title"];
-                    main.appendChild(h);
+                    for(var j=0 ; j<batch.length ; ++j)
+                    {
+                        var record = batch[j];
 
-                    var str = "";
+                        var h = document.createElement("h4");
+                        h.innerHTML = record["title"];
+                        main.appendChild(h);
 
-                    if (record["year"])
-                    {
-                        str += record["year"];
-                    }
-                    if (record["product"])
-                    {
-                        str += "　　" + record["product"];
-                    }
-                    if (record["category"])
-                    {
-                        str += " " + record["category"];
-                    }
-                    if (record["artist"])
-                    {
-                        str += "　　　" + record["artist"];
-                    }
-                    var p = document.createElement("p");
-                    p.className = "song";
-                    main.appendChild(p);
-                    p.innerHTML = str;
+                        var str = "";
 
+                        if (record["year"])
+                        {
+                            str += record["year"];
+                        }
+                        if (record["product"])
+                        {
+                            str += "　　" + record["product"];
+                        }
+                        if (record["category"])
+                        {
+                            str += " " + record["category"];
+                        }
+                        if (record["artist"])
+                        {
+                            str += "　　　" + record["artist"];
+                        }
+                        var p = document.createElement("p");
+                        p.className = "song";
+                        main.appendChild(p);
+                        p.innerHTML = str;
+                    }
                 }
                 var hr = document.createElement("hr");
                 main.appendChild(hr);
