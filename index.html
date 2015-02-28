@@ -11,6 +11,14 @@
     </head>
     <body>
         <div>
+            <button onclick="reset();">リセット</button>
+        </div>
+
+        <div id="main">
+        </div>
+        <br>
+
+        <div>
             抽選曲数
             <input type="number"
                 id="selectCount"
@@ -24,11 +32,8 @@
             <label for="isSquence">連番出力</label>
         </div>
 
-        <div id="main">
-        </div>
-        <br>
         <div class="buttonDiv">
-            <button onclick="select();">抽選</button>
+            <button class="selectButton" onclick="select();">抽選</button>
         </div>
 
         <script type="text/javascript">
@@ -59,7 +64,26 @@
                 }
 
                 var batch = selectedIndexBatches[selectedIndexBatches.length - 1];
-                generateOutput(selectedIndexBatches.length, batch)
+                generateOutput(selectedIndexBatches.length, batch);
+
+                if (localStorage)
+                {
+                    localStorage.setItem("selected", JSON.stringify(selectedIndexBatches));
+                }
+            }
+
+            function reset()
+            {
+                selectedIndexBatches = [];
+                if (localStorage)
+                {
+                    localStorage.clear();
+                }
+                while(main.childNodes.length > 0)
+                {
+                    var child = main.childNodes[0];
+                    main.removeChild(child);
+                }
             }
 
             function generateOutput(caption, batch)
@@ -148,6 +172,22 @@
             var p = document.createElement("p");
             p.innerHTML = "現在" + data.length + "曲登録";
             document.getElementById("main").appendChild(p);
+
+            // ロード
+            if(window.localStorage)
+            {
+                localStorage = window.localStorage;
+                var saveData = localStorage.getItem("selected");
+                if (saveData)
+                {
+                    selectedIndexBatches = JSON.parse(saveData);
+                    for(var i=0 ; i<selectedIndexBatches.length; ++i)
+                    {
+                        generateOutput(i + 1, selectedIndexBatches[i]);
+                    }
+                }
+            }
+
         </script>
     </body>
 <html>
