@@ -69,7 +69,7 @@
 
                 for(var i=0 ; i<selectCount; ++i)
                 {
-                    var batchIndex = Math.floor(Math.random() * data.length - (batchCount-1));
+                    var batchIndex = Math.floor(Math.random() * (data.length - (batchCount-1)));
                     var batch = data.splice(batchIndex, batchCount)
 
                     for(var j=0 ; j<batch.length ; ++j)
