@@ -47,10 +47,11 @@
             function onClickSelect()
             {
                 var totalSelectCount = Number($("#selectCount").val());
+                var maxTotalSelectCount = Number($("#selectCount").prop('max'));
 
-                if (totalSelectCount > Number($("#selectCount").prop('max')))
+                if (totalSelectCount > maxTotalSelectCount)
                 {
-                    alert("抽選数が多すぎます");
+                    alert("抽選数が多すぎます(最大" + maxTotalSelectCount + ")");
                     return;
                 }
 
